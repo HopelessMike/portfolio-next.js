@@ -1,5 +1,5 @@
 "use client"
-
+//error 404 money not found
 import { useState, useEffect } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
