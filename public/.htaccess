@@ -1,0 +1,16 @@
+# Inizio Istruzioni per la Gestione degli Errori
+
+# 1. Definisci il file custom da usare per gli errori 404
+ErrorDocument 404 /404.html
+
+# 2. Imposta header specifici solo per il file 404.html per prevenire il caching
+<Files "404.html">
+  # Dice ai browser e ai server di non salvare mai una copia cache della pagina
+  Header set Cache-Control "no-store, max-age=0, must-revalidate"
+  # Per compatibilità con vecchi sistemi
+  Header set Pragma "no-cache"
+  # Imposta la data di scadenza della cache al passato
+  Header set Expires "Wed, 11 Jan 1984 05:00:00 GMT"
+</Files>
+
+# Fine Istruzioni
