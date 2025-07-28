@@ -24,6 +24,7 @@ export default function ContactSection() {
     })
   }
 
+  // NUOVA FUNZIONE handleSubmit CON GESTIONE ERRORI AVANZATA
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsSubmitting(true)
@@ -38,15 +39,19 @@ export default function ContactSection() {
         body: JSON.stringify(formState),
       });
 
+      const responseData = await response.json();
+
       if (!response.ok) {
-        throw new Error('Qualcosa è andato storto durante l\'invio.');
+        const errorMsg = responseData.error || `Errore del server: ${response.status}`;
+        throw new Error(errorMsg);
       }
 
       setIsSubmitted(true);
       setFormState({ name: "", email: "", message: "" });
 
     } catch (err: any) {
-      setError(err.message || 'Si è verificato un errore. Riprova più tardi.');
+      setError(err.message || 'Si è verificato un errore imprevisto. Riprova.');
+      console.error("Errore durante l'invio del form:", err);
     } finally {
       setIsSubmitting(false);
     }
@@ -54,11 +59,13 @@ export default function ContactSection() {
 
   return (
     <section id="contact" className="py-20 md:py-32 relative">
+      {/* Elemento decorativo di sfondo ripristinato */}
       <div className="absolute inset-0 z-0">
         <div className="absolute bottom-0 left-0 w-full h-full bg-[radial-gradient(circle_at_30%_70%,rgba(var(--primary),0.1),transparent_40%)]"></div>
       </div>
 
       <div className="container mx-auto px-4 relative z-10">
+        {/* Animazioni ripristinate */}
         <motion.div
           ref={ref}
           initial={{ opacity: 0 }}
@@ -76,6 +83,7 @@ export default function ContactSection() {
         </motion.div>
 
         <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+          {/* Animazioni e tutti gli elementi di contatto ripristinati */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -50 }}
@@ -119,7 +127,6 @@ export default function ContactSection() {
               </div>
             </div>
 
-
             <div className="glass p-6 flex items-start space-x-4">
               <div className="p-3 rounded-full bg-accent/20">
                 <MapPin className="w-6 h-6 text-accent" />
@@ -131,6 +138,7 @@ export default function ContactSection() {
             </div>
           </motion.div>
 
+          {/* Animazioni ripristinate */}
           <motion.div
             initial={{ opacity: 0, x: 50 }}
             animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 50 }}
