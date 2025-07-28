@@ -1,13 +1,12 @@
+// File: app/layout.tsx (Versione Aggiornata)
+
 import type { Metadata } from "next"
 import { Inter, Space_Grotesk } from "next/font/google"
 import "./globals.css"
-import { ThemeProvider } from "@/components/theme-provider"
-import { LoadingProvider } from "@/app/context/LoadingContext"
-import { Analytics } from "@vercel/analytics/next"
+import ClientLayout from "@/components/client-layout" // Importiamo il nostro nuovo contenitore
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" })
 const spaceGrotesk = Space_Grotesk({ subsets: ["latin"], variable: "--font-space" })
-
 
 const siteUrl = "https://michelemiranda.com"
 
@@ -83,34 +82,12 @@ export default function RootLayout({
   return (
     <html lang="it" suppressHydrationWarning>
       <body className={`${inter.variable} ${spaceGrotesk.variable} font-sans bg-black text-white`}>
-        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false}>
-          <LoadingProvider>
-            {children}
-            <Analytics />
-          </LoadingProvider>
-        </ThemeProvider>
+        {/* Ora il layout contiene solo il nostro componente client-side,
+            che a sua volta gestisce tutti i provider e il banner. */}
+        <ClientLayout>
+          {children}
+        </ClientLayout>
       </body>
     </html>
   )
 }
-
-//  return (
-//    <html lang="it" suppressHydrationWarning>
-//      <body className={`${inter.variable} ${spaceGrotesk.variable} font-sans bg-black text-white`}>
-//        <script
-//          type="application/ld+json"
-//          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-//        />
-//        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false}>
-//          {/* MODIFICA 2: Avvolgiamo i 'children' (cioè tutte le pagine del sito)
-//              con il LoadingProvider. La LoadingScreen non viene più inserita qui
-//              perché è già gestita all'interno del Provider.
-//          */}
-//          <LoadingProvider>
-//            {children}
-//          </LoadingProvider>
-//        </ThemeProvider>
-//      </body>
-//    </html>
-//  )
-//}
