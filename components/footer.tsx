@@ -2,9 +2,13 @@
 
 import { motion } from "framer-motion"
 import { Github, Twitter, Linkedin, Instagram } from "lucide-react"
+import Link from "next/link" // <-- MODIFICA: Importato il componente Link
+import { usePathname } from "next/navigation" // <-- MODIFICA: Importato per gestire i link
 
 export default function Footer() {
   const currentYear = new Date().getFullYear()
+  const pathname = usePathname()
+  const isHomePage = pathname === "/"
 
   return (
     <footer className="py-8 relative">
@@ -17,8 +21,10 @@ export default function Footer() {
                 Ti ho incuriosito? contattami per discutere di come posso aiutarti a raggiungere i tuoi obiettivi con l'AI.
               </p>
               <div className="flex space-x-4">
+                {/* Nota: Ricorda di aggiornare gli href dei social con i tuoi link reali */}
                 <motion.a
                   href="#"
+                  target="_blank" rel="noopener noreferrer"
                   whileHover={{ y: -5 }}
                   whileTap={{ scale: 0.95 }}
                   className="p-2 rounded-full bg-card/50 hover:bg-card transition-colors"
@@ -28,6 +34,7 @@ export default function Footer() {
                 </motion.a>
                 <motion.a
                   href="#"
+                  target="_blank" rel="noopener noreferrer"
                   whileHover={{ y: -5 }}
                   whileTap={{ scale: 0.95 }}
                   className="p-2 rounded-full bg-card/50 hover:bg-card transition-colors"
@@ -36,7 +43,8 @@ export default function Footer() {
                   <Twitter size={20} />
                 </motion.a>
                 <motion.a
-                  href="#"
+                  href="https://www.linkedin.com/in/miranda-michele/"
+                  target="_blank" rel="noopener noreferrer"
                   whileHover={{ y: -5 }}
                   whileTap={{ scale: 0.95 }}
                   className="p-2 rounded-full bg-card/50 hover:bg-card transition-colors"
@@ -46,6 +54,7 @@ export default function Footer() {
                 </motion.a>
                 <motion.a
                   href="#"
+                  target="_blank" rel="noopener noreferrer"
                   whileHover={{ y: -5 }}
                   whileTap={{ scale: 0.95 }}
                   className="p-2 rounded-full bg-card/50 hover:bg-card transition-colors"
@@ -58,36 +67,32 @@ export default function Footer() {
 
             <div>
               <h3 className="text-lg font-bold mb-4">Link Rapidi</h3>
+              {/* MODIFICA: Sostituiti <a> con <Link> e resi i link "intelligenti" */}
               <ul className="space-y-2">
                 <li>
-                  <a href="#home" className="text-gray-400 hover:text-white transition-colors">
+                  <Link href={isHomePage ? "#home" : "/#home"} className="text-gray-400 hover:text-white transition-colors">
                     Home
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href="#about" className="text-gray-400 hover:text-white transition-colors">
+                  <Link href={isHomePage ? "#about" : "/#about"} className="text-gray-400 hover:text-white transition-colors">
                     Chi Sono
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href="#skills" className="text-gray-400 hover:text-white transition-colors">
-                    Competenze
-                  </a>
+                  <Link href={isHomePage ? "#services" : "/#services"} className="text-gray-400 hover:text-white transition-colors">
+                    Servizi
+                  </Link>
                 </li>
                 <li>
-                  <a href="#projects" className="text-gray-400 hover:text-white transition-colors">
+                  <Link href={isHomePage ? "#projects" : "/#projects"} className="text-gray-400 hover:text-white transition-colors">
                     Progetti
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href="#experience" className="text-gray-400 hover:text-white transition-colors">
-                    Esperienza
-                  </a>
-                </li>
-                <li>
-                  <a href="#contact" className="text-gray-400 hover:text-white transition-colors">
+                  <Link href={isHomePage ? "#contact" : "/#contact"} className="text-gray-400 hover:text-white transition-colors">
                     Contatti
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </div>
@@ -104,8 +109,15 @@ export default function Footer() {
             </div>
           </div>
 
+          {/* MODIFICA: Aggiunto il link alla Privacy Policy qui */}
           <div className="mt-8 pt-8 border-t border-gray-800 text-center text-gray-500 text-sm">
-            <p>&copy; {currentYear} Michele Miranda. Tutti i diritti riservati.</p>
+            <div className="flex flex-col sm:flex-row justify-center items-center gap-x-4 gap-y-2">
+              <p>&copy; {currentYear} Michele Miranda. Tutti i diritti riservati.</p>
+              <span className="hidden sm:inline">|</span>
+              <Link href="/privacy-policy" className="hover:text-white underline transition-colors">
+                Privacy Policy
+              </Link>
+            </div>
           </div>
         </div>
       </div>
