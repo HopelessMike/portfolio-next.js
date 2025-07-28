@@ -162,16 +162,16 @@ export default function HeroSectionNew() {
           {/* Mobile Stats - Compact */}
           <div className="flex justify-center gap-2 mt-4">
             <div className="glass rounded-lg p-2 border border-white/10 text-center">
-              <div className="text-sm font-bold text-primary">150+</div>
-              <div className="text-xs text-gray-400">Projects</div>
+              <div className="text-sm font-bold text-primary">4+</div>
+              <div className="text-xs text-gray-400">Anni di Esperienza</div>
             </div>
             <div className="glass rounded-lg p-2 border border-white/10 text-center">
-              <div className="text-sm font-bold text-secondary">98%</div>
-              <div className="text-xs text-gray-400">Success</div>
+              <div className="text-sm font-bold text-secondary">6</div>
+              <div className="text-xs text-gray-400">Certificazioni AI & Data</div>
             </div>
             <div className="glass rounded-lg p-2 border border-white/10 text-center">
-              <div className="text-sm font-bold text-accent">7+</div>
-              <div className="text-xs text-gray-400">Years</div>
+              <div className="text-sm font-bold text-accent">10+</div>
+              <div className="text-xs text-gray-400">Aziende Supportate</div>
             </div>
           </div>
         </div>
@@ -288,7 +288,7 @@ export default function HeroSectionNew() {
               >
                 <div className="text-center">
                   <div className="text-2xl font-bold text-primary">4+</div>
-                  <div className="text-xs text-gray-400">Anni di esperienza</div>
+                  <div className="text-xs text-gray-400">Anni di Esperienza</div>
                 </div>
               </motion.div>
 
