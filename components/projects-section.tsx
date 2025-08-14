@@ -7,19 +7,42 @@ import Image from "next/image"
 
 const projects = [
   {
-    title: "TaskFlow - Productivity App",
+    title: "Cinema Constellations – AI Movie Universe",
     description:
-      "Un'app mobile completa per la gestione delle attività e il monitoraggio della produttività con elementi di gamification, sistema di ricompense e analisi dettagliate.",
+      "Un universo 3D interattivo in cui ogni stella è un film: vicinanza semantica, cluster intelligenti e analisi in tempo reale con LLM.",
     longDescription:
-      "TaskFlow è un'app di produttività moderna che combina la gestione delle attività con la gamification per mantenere gli utenti motivati. Le funzionalità includono il monitoraggio delle attività quotidiane, sistemi di ricompense, analisi della produttività e funzionalità di ranking sociale per incoraggiare abitudini coerenti.",
-    tags: ["React Native", "Node.js", "MongoDB", "Gamification"],
-    image: "/images/projects/task-management-app.png",
+      "Cinema Constellations trasforma un catalogo film in una mappa stellare navigabile. Il pipeline di data preparation in Python costruisce feature testuali (tags), genera embeddings con Sentence-Transformers, riduce lo spazio con UMAP (384→3D), identifica nebulose con HDBSCAN e pre-calcola i vicini più prossimi con scikit-learn. L’interfaccia Next.js/Three.js rende il grafo in tempo reale, mentre un LLM (via AI SDK + OpenAI) produce comparazioni critiche tra coppie di film con streaming. Il risultato è una UX elegante, responsiva e consulenziale: esplorazione semantica, insight immediati e performance da produzione su Vercel.",
+    tags: [
+      // Frontend & infra
+      "Next.js 14",
+      "React 18",
+      "Three.js",
+      "@react-three/fiber",
+      "Vercel",
+      // AI/LLM
+      "AI SDK + OpenAI",
+      // Data & ML
+      "Python",
+      "Pandas",
+      "Sentence-Transformers",
+      "UMAP",
+      "HDBSCAN",
+      "scikit-learn",
+    ],
+    image: "/images/projects/cinema-constellations.png",
     links: {
-      demo: "#",
-      github: "#",
+      demo: "https://michelemiranda.com/cinema-constellations",
+      github: "https://github.com/HopelessMike/CinemaConstellation",
     },
-    features: ["Gestione Attività", "Sistema Ricompense", "Monitoraggio Progressi", "Classifiche Sociali"],
-    color: "from-blue-500/20 to-purple-500/20",
+    features: [
+      "Mappa 3D interattiva (WebGL/Three.js)",
+      "Vicinanza semantica tra film (embeddings)",
+      "Cluster automatici (HDBSCAN) e costellazioni",
+      "Comparazioni critiche LLM in streaming",
+      "Pipeline dati riproducibile (Python)",
+      "Responsive e mobile-friendly",
+    ],
+    color: "from-cyan-500/20 to-purple-500/20",
   },
   {
     title: "OneSoft - Business Platform",
@@ -140,15 +163,25 @@ export default function ProjectsSection() {
     }
   }
 
+  // 🔧 Icona coerente per progetto: niente più smartphone sul primo
   const getProjectIcon = (index: number) => {
-    const icons = [
-      <Smartphone key="smartphone" className="w-5 h-5 text-white" />,
-      <Globe key="globe" className="w-5 h-5 text-white" />,
-      <Target key="target" className="w-5 h-5 text-white" />,
-      <Film key="film" className="w-5 h-5 text-white" />,
-      <Bot key="bot" className="w-5 h-5 text-white" />,
-    ]
-    return icons[index] || <Globe className="w-5 h-5 text-white" />
+    const title = projects[index]?.title || ""
+    if (title.startsWith("Cinema Constellations")) {
+      return <Film className="w-5 h-5 text-white" />
+    }
+    if (title.startsWith("OneSoft")) {
+      return <Globe className="w-5 h-5 text-white" />
+    }
+    if (title.startsWith("HabitFlow")) {
+      return <Target className="w-5 h-5 text-white" />
+    }
+    if (title.startsWith("Film Fan Finder")) {
+      return <Film className="w-5 h-5 text-white" />
+    }
+    if (title.startsWith("AI Automation Consultant")) {
+      return <Bot className="w-5 h-5 text-white" />
+    }
+    return <Globe className="w-5 h-5 text-white" />
   }
 
   return (

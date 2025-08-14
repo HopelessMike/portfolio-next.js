@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { useEffect, useState, useMemo } from "react"
 import Image from "next/image"
 import { motion, AnimatePresence } from "framer-motion"
 
@@ -31,7 +31,7 @@ export default function LoadingScreen({ onLoadingComplete = () => {} }: { onLoad
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.4, // Leggermente aggiustato per una sequenza più definita
+        staggerChildren: 0.4,
         delayChildren: 0.2,
       },
     },
@@ -63,24 +63,46 @@ export default function LoadingScreen({ onLoadingComplete = () => {} }: { onLoad
       transition: {
         duration: 2,
         ease: "easeInOut",
-        delay: 0.5, // Leggero ritardo per iniziare dopo l'apparizione del nome
+        delay: 0.5,
       },
     },
   }
 
+  /** ✨ Effetto particellare – identico a Cinema Constellations */
   const particleVariants = {
-    animate: {
-      y: [0, -20, 0],
-      x: [0, 10, -10, 0],
-      opacity: [0.3, 1, 0.3],
+    animate: (i: number) => ({
+      y: [0, -80, 0],
+      x: [0, 40 * (i % 2 === 0 ? 1 : -1), -40 * (i % 2 === 0 ? 1 : -1), 0],
+      opacity: [0, 0.8, 0.8, 0],
       scale: [0.8, 1.2, 0.8],
       transition: {
-        duration: 3,
+        duration: 8 + i * 0.5,
         repeat: Number.POSITIVE_INFINITY,
         ease: "easeInOut",
+        delay: Math.random() * 1.5,
       },
-    },
-  }
+    }),
+  } as const
+
+  const memoizedParticles = useMemo(() => {
+    return Array.from({ length: 25 }).map((_, i) => (
+      <motion.div
+        key={i}
+        className="absolute rounded-full"
+        style={{
+          width: `${Math.random() * 9 + 6}px`,
+          height: `${Math.random() * 9 + 6}px`,
+          background: `radial-gradient(circle, ${Math.random() > 0.5 ? "#8b5cf6" : "#06b6d4"} 0%, transparent 70%)`,
+          left: `${Math.random() * 100}%`,
+          top: `${Math.random() * 100}%`,
+          filter: "blur(0.5px)",
+        }}
+        custom={i}
+        variants={particleVariants as any}
+        animate="animate"
+      />
+    ))
+  }, [])
 
   return (
     <AnimatePresence onExitComplete={onLoadingComplete}>
@@ -92,24 +114,9 @@ export default function LoadingScreen({ onLoadingComplete = () => {} }: { onLoad
           animate="visible"
           exit="exit"
         >
+          {/* Particelle in movimento */}
           <div className="absolute inset-0 overflow-hidden">
-            {Array.from({ length: 20 }).map((_, i) => (
-              <motion.div
-                key={i}
-                className="absolute w-2 h-2 rounded-full"
-                style={{
-                  background: Math.random() > 0.5 ? "#fc52ff" : "#00e1f4",
-                  left: `${Math.random() * 100}%`,
-                  top: `${Math.random() * 100}%`,
-                }}
-                variants={particleVariants}
-                animate="animate"
-                transition={{
-                  delay: Math.random() * 2,
-                  duration: 2 + Math.random() * 2,
-                }}
-              />
-            ))}
+            {memoizedParticles}
           </div>
 
           {/* ================================================================== */}
