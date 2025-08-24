@@ -1,0 +1,7 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "rewrites": [
+    { "source": "/InsightSuite", "destination": "https://v0-insight-suite.vercel.app/InsightSuite" },
+    { "source": "/InsightSuite/(.*)", "destination": "https://v0-insight-suite.vercel.app/InsightSuite/$1" }
+  ]
+}
