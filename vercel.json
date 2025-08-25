@@ -23,7 +23,7 @@
       },
       {
         "source": "/InsightSuite",
-        "destination": "https://v0-insight-suite.vercel.app/"
+        "destination": "https://v0-insight-suite.vercel.app/InsightSuite"
       },
       {
         "source": "/InsightSuite/:path*",
