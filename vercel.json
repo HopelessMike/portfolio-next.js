@@ -3,23 +3,23 @@
     "rewrites": [
       {
         "source": "/InsightSuite/api/:path*",
-        "destination": "https://v0-insight-suite.vercel.app/api/:path*"
+        "destination": "https://v0-insight-suite.vercel.app/InsightSuite/api/:path*"
       },
       {
         "source": "/InsightSuite/health",
-        "destination": "https://v0-insight-suite.vercel.app/health"
+        "destination": "https://v0-insight-suite.vercel.app/InsightSuite/health"
       },
       {
         "source": "/InsightSuite/docs",
-        "destination": "https://v0-insight-suite.vercel.app/docs"
+        "destination": "https://v0-insight-suite.vercel.app/InsightSuite/docs"
       },
       {
         "source": "/InsightSuite/openapi.json",
-        "destination": "https://v0-insight-suite.vercel.app/openapi.json"
+        "destination": "https://v0-insight-suite.vercel.app/InsightSuite/openapi.json"
       },
       {
         "source": "/InsightSuite/_next/:path*",
-        "destination": "https://v0-insight-suite.vercel.app/_next/:path*"
+        "destination": "https://v0-insight-suite.vercel.app/InsightSuite/_next/:path*"
       },
       {
         "source": "/InsightSuite",
