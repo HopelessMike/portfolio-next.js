@@ -45,19 +45,44 @@ const projects = [
     color: "from-cyan-500/20 to-purple-500/20",
   },
   {
-    title: "OneSoft - Business Platform",
+    title: "InsightSuite – Insights in tempo reale con LLM",
     description:
-      "Una piattaforma software aziendale all-in-one che integra calendario, chat, CRM e funzionalità ERP per operazioni aziendali ottimizzate.",
+      "Dashboard interattiva per esplorare recensioni e insight",
     longDescription:
-      "OneSoft è una piattaforma completa di gestione aziendale che unifica gli strumenti aziendali essenziali in un'esperienza fluida. Include gestione calendario, comunicazione del team, gestione delle relazioni con i clienti e moduli di pianificazione delle risorse aziendali.",
-    tags: ["React", "Node.js", "PostgreSQL", "Microservices"],
-    image: "/images/projects/business-software.webp",
+      "InsightSuite trasforma dataset di recensioni in un’esperienza di analisi fluida e produttiva.",
+    tags: [
+      // Frontend & infra
+      "Next.js 14",
+      "React 18",
+      "TypeScript",
+      "Tailwind CSS",
+      "Recharts",
+      "Vercel",
+      // Backend & data
+      "FastAPI",
+      "Python",
+      "Pandas",
+      "HDBSCAN",
+      "PCA",
+      "TF-IDF",
+      // LLM & embeddings
+      "LLM (Claude)",
+      "Voyage AI",
+      "Serverless Functions"
+    ],
+    image: "/images/projects/InsightSuite.png",
     links: {
-      demo: "#",
-      github: "#",
+      demo: "https://michelemiranda.com/InsightSuite",
+      github: "https://github.com/HopelessMike/InsightSuite"
     },
-    features: ["Calendario Integrato", "Chat del Team", "Sistema CRM", "Modulo ERP"],
-    color: "from-purple-500/20 to-blue-500/20",
+    features: [
+      "Filtri e ricerca istantanei su migliaia di recensioni",
+      "Backend FastAPI serverless (endpoint /reviews, /health)",
+      "Pipeline Python: cleaning, sentiment, embeddings (cache), clustering",
+      "Riassunti di cluster e Personas generati con LLM (con fallback sicuro)",
+      "Grafici interattivi responsive (Recharts) e stato con Zustand"
+        ],
+    color: "from-emerald-500/20 to-sky-500/20"
   },
   {
     title: "HabitFlow - Wellness Tracker",

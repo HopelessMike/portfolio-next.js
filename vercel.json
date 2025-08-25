@@ -2,6 +2,14 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "rewrites": [
     { "source": "/InsightSuite", "destination": "https://v0-insight-suite.vercel.app/InsightSuite" },
-    { "source": "/InsightSuite/(.*)", "destination": "https://v0-insight-suite.vercel.app/InsightSuite/$1" }
+    { "source": "/InsightSuite/:path*", "destination": "https://v0-insight-suite.vercel.app/InsightSuite/:path*" }
+  ],
+  "headers": [
+    {
+      "source": "/InsightSuite/:path*",
+      "headers": [
+        { "key": "X-Proxy-Pass", "value": "InsightSuite" }
+      ]
+    }
   ]
 }
