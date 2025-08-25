@@ -23,11 +23,11 @@
       },
       {
         "source": "/InsightSuite",
-        "destination": "https://v0-insight-suite.vercel.app/InsightSuite"
+        "destination": "https://v0-insight-suite.vercel.app/"
       },
       {
         "source": "/InsightSuite/:path*",
-        "destination": "https://v0-insight-suite.vercel.app/InsightSuite/:path*"
+        "destination": "https://v0-insight-suite.vercel.app/:path*"
       }
     ],
     "headers": [
