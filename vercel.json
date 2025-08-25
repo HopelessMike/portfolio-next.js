@@ -3,54 +3,23 @@
     "rewrites": [
       {
         "source": "/InsightSuite/api/:path*",
-        "destination": "https://v0-insight-suite.vercel.app/InsightSuite/api/:path*"
+        "destination": "https://v0-insight-suite.vercel.app/api/:path*"
       },
       {
         "source": "/InsightSuite/health",
-        "destination": "https://v0-insight-suite.vercel.app/InsightSuite/health"
+        "destination": "https://v0-insight-suite.vercel.app/health"
       },
       {
         "source": "/InsightSuite/docs",
-        "destination": "https://v0-insight-suite.vercel.app/InsightSuite/docs"
+        "destination": "https://v0-insight-suite.vercel.app/docs"
       },
       {
         "source": "/InsightSuite/openapi.json",
-        "destination": "https://v0-insight-suite.vercel.app/InsightSuite/openapi.json"
-      },
-      {
-        "source": "/InsightSuite/_next/:path*",
-        "destination": "https://v0-insight-suite.vercel.app/InsightSuite/_next/:path*"
-      },
-      {
-        "source": "/InsightSuite",
-        "destination": "https://v0-insight-suite.vercel.app/InsightSuite"
+        "destination": "https://v0-insight-suite.vercel.app/openapi.json"
       },
       {
         "source": "/InsightSuite/:path*",
         "destination": "https://v0-insight-suite.vercel.app/InsightSuite/:path*"
-      }
-    ],
-    "headers": [
-      {
-        "source": "/InsightSuite/(.*)",
-        "headers": [
-          {
-            "key": "X-Proxy-Pass",
-            "value": "InsightSuite"
-          },
-          {
-            "key": "Access-Control-Allow-Origin",
-            "value": "*"
-          },
-          {
-            "key": "Access-Control-Allow-Methods",
-            "value": "GET, POST, PUT, DELETE, OPTIONS"
-          },
-          {
-            "key": "Access-Control-Allow-Headers",
-            "value": "Content-Type, Authorization, X-Requested-With"
-          }
-        ]
       }
     ]
   }
