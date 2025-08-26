@@ -1,7 +1,10 @@
 {
   "$schema": "https://openapi.vercel.sh/microfrontends.json",
   "applications": {
-    "portfolio": {},
+    "v0-website-portfolio": {
+      "development": {
+        "fallback": "michelemiranda.com"
+      }},
     "v0-insight-suite": {
       "routing": [
         { "paths": ["/InsightSuite", "/InsightSuite/:path*"] }
