@@ -1,4 +1,5 @@
 /** @type {import('next').NextConfig} */
+import { withMicrofrontends } from '@vercel/microfrontends/next/config';
 const nextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
@@ -6,6 +7,6 @@ const nextConfig = {
   typescript: {
     ignoreBuildErrors: true,
   },
-}
+};
 
-export default nextConfig
+export default withMicrofrontends(nextConfig);
