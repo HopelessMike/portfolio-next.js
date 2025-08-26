@@ -1,8 +1,8 @@
-  {
+ {
     "rewrites": [
       {
         "source": "/InsightSuite/_next/(.*)",
-        "destination": "https://v0-insight-suite.vercel.app/_next/$1"
+        "destination": "https://v0-insight-suite.vercel.app/InsightSuite/_next/$1"
       },
       {
         "source": "/InsightSuite/demo/(.*)",
@@ -15,6 +15,14 @@
       {
         "source": "/InsightSuite/health",
         "destination": "https://v0-insight-suite.vercel.app/health"
+      },
+      {
+        "source": "/InsightSuite/docs",
+        "destination": "https://v0-insight-suite.vercel.app/docs"
+      },
+      {
+        "source": "/InsightSuite/openapi.json",
+        "destination": "https://v0-insight-suite.vercel.app/openapi.json"
       },
       {
         "source": "/InsightSuite",
