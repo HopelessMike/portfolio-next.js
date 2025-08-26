@@ -5,6 +5,10 @@
         "destination": "https://v0-insight-suite.vercel.app/_next/$1"
       },
       {
+        "source": "/InsightSuite/demo/(.*)",
+        "destination": "https://v0-insight-suite.vercel.app/InsightSuite/demo/$1"
+      },
+      {
         "source": "/InsightSuite/api/(.*)",
         "destination": "https://v0-insight-suite.vercel.app/api/$1"
       },
