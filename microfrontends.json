@@ -1,6 +1,9 @@
 {
   "$schema": "https://openapi.vercel.sh/microfrontends.json",
   "applications": {
+    "v0-website-portfolio": {
+      "packageName": "my-v0-project"
+    },
     "v0-insight-suite": {
       "packageName": "v0-insight-suite",
       "routing": [

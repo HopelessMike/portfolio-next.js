@@ -1,14 +1,5 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "buildCommand": "next build",
-  "rewrites": [
-    {
-      "source": "/InsightSuite",
-      "destination": "/vc-ap-v0-insight-suite"
-    },
-    {
-      "source": "/InsightSuite/:path*",
-      "destination": "/vc-ap-v0-insight-suite/:path*"
-    }
-  ]
+  "framework": "nextjs"
 }
