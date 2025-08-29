@@ -7,7 +7,7 @@
         { 
           "paths": [
             "/InsightSuite",
-            "/InsightSuite/*"
+            "/InsightSuite/:path*"
           ]
         }
       ]
