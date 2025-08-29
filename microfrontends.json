@@ -1,11 +1,20 @@
 {
   "$schema": "https://openapi.vercel.sh/microfrontends.json",
   "applications": {
-    "v0-website-portfolio": {},
+    "v0-website-portfolio": {
+      "development": {
+        "fallback": "https://michelemiranda.com"
+      }
+    },
     "v0-insight-suite": {
       "routing": [
-        { "paths": ["/InsightSuite", "/InsightSuite/:path*"] }
-      ]
+        {
+          "paths": ["/InsightSuite", "/InsightSuite/:path*"]
+        }
+      ],
+      "development": {
+        "fallback": "https://v0-insight-suite.vercel.app"
+      }
     }
   }
 }
