@@ -1,8 +1,3 @@
 {
-  "rewrites": [
-    {
-      "source": "/InsightSuite/api/:path*",
-      "destination": "https://v0-insight-suite.vercel.app/api/:path*"
-    }
-  ]
+  "$schema": "https://openapi.vercel.sh/vercel.json"
 }
