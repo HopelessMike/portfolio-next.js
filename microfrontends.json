@@ -11,7 +11,10 @@
       "packageName": "insightsuite",
       "routing": [
         {
-          "paths": ["/InsightSuite", "/InsightSuite/:path*"]
+          "paths": [
+            "/InsightSuite",
+            "/InsightSuite/:path*"
+          ]
         }
       ],
       "development": {
