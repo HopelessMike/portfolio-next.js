@@ -2,19 +2,25 @@
   "$schema": "https://openapi.vercel.sh/microfrontends.json",
   "applications": {
     "v0-website-portfolio": {
-      "packageName": "my-v0-project",
       "development": {
-        "fallback": "https://michelemiranda.com"
+        "fallback": "https://v0-website-portfolio.vercel.app"
       }
     },
     "v0-insight-suite": {
-      "packageName": "insightsuite",
       "routing": [
-        { "group": "insightsuite", "paths": ["/InsightSuite", "/InsightSuite/:path*"] }
-      ],
-      "development": {
-        "fallback": "https://v0-insight-suite.vercel.app"
-      }
+        {
+          "group": "insightsuite",
+          "paths": ["/InsightSuite", "/InsightSuite/:path*"]
+        }
+      ]
+    },
+    "ldr-icons": {
+      "routing": [
+        {
+          "group": "ldr-icons",
+          "paths": ["/ldr-icons", "/ldr-icons/:path*"]
+        }
+      ]
     }
   }
 }
