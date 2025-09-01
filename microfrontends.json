@@ -2,6 +2,7 @@
   "$schema": "https://openapi.vercel.sh/microfrontends.json",
   "applications": {
     "v0-website-portfolio": {
+      "packageName": "my-v0-project",
       "development": {
         "fallback": "https://v0-website-portfolio.vercel.app"
       }

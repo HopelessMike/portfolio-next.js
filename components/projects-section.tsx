@@ -7,27 +7,15 @@ import Image from "next/image"
 
 const projects = [
   {
-    title: "Cinema Constellations – AI Movie Universe",
+    title: "Cinema Constellations — AI Movie Universe",
     description:
-      "Un universo 3D interattivo in cui ogni stella è un film: vicinanza semantica, cluster intelligenti e analisi in tempo reale con LLM.",
+      "Galassia 3D dei film: embeddings → costellazioni, insight LLM in streaming.",
     longDescription:
-      "Cinema Constellations trasforma un catalogo film in una mappa stellare navigabile. Il pipeline di data preparation in Python costruisce feature testuali (tags), genera embeddings con Sentence-Transformers, riduce lo spazio con UMAP (384→3D), identifica nebulose con HDBSCAN e pre-calcola i vicini più prossimi con scikit-learn. L’interfaccia Next.js/Three.js rende il grafo in tempo reale, mentre un LLM (via AI SDK + OpenAI) produce comparazioni critiche tra coppie di film con streaming. Il risultato è una UX elegante, responsiva e consulenziale: esplorazione semantica, insight immediati e performance da produzione su Vercel.",
+      "Trame e metadati diventano vettori (Sentence-Transformers), proiettati in 3D con UMAP e raggruppati da HDBSCAN per rivelare costellazioni semantiche. L’engine WebGL (Next.js/Three.js) consente un volo fluido tra i titoli mentre un LLM streamma confronti contestuali sui vicini: esplorazione intuitiva, pronta per analisi e demo ad alte prestazioni.",
     tags: [
-      // Frontend & infra
-      "Next.js 14",
-      "React 18",
-      "Three.js",
-      "@react-three/fiber",
-      "Vercel",
-      // AI/LLM
-      "AI SDK + OpenAI",
-      // Data & ML
-      "Python",
-      "Pandas",
-      "Sentence-Transformers",
-      "UMAP",
-      "HDBSCAN",
-      "scikit-learn",
+      "Python", "Pandas", "Sentence-Transformers", "UMAP", "HDBSCAN", "scikit-learn",
+      "OpenAI",
+      "Next.js", "React"
     ],
     image: "/images/projects/cinema-constellations.png",
     links: {
@@ -35,69 +23,63 @@ const projects = [
       github: "https://github.com/HopelessMike/CinemaConstellation",
     },
     features: [
-      "Mappa 3D interattiva (WebGL/Three.js)",
-      "Vicinanza semantica tra film (embeddings)",
-      "Cluster automatici (HDBSCAN) e costellazioni",
-      "Comparazioni critiche LLM in streaming",
-      "Pipeline dati riproducibile (Python)",
-      "Responsive e mobile-friendly",
+      "Spazio semantico dei film (embeddings)",
+      "UMAP 3D + clustering HDBSCAN",
+      "Comparazioni LLM in streaming",
+      "Pipeline Python riproducibile",
+      "WebGL reattivo e mobile",
     ],
     color: "from-cyan-500/20 to-purple-500/20",
   },
   {
-    title: "InsightSuite – Insights in tempo reale con LLM",
+    title: "InsightSuite — Insights in tempo reale con LLM",
     description:
-      "Dashboard interattiva per esplorare recensioni e insight",
+      "Recensioni → insight azionabili: clustering, sentiment e Personas generate da LLM.",
     longDescription:
-      "InsightSuite trasforma dataset di recensioni in un’esperienza di analisi fluida e produttiva.",
+      "Una pipeline Python estrae segnali (cleaning, sentiment, TF-IDF, embeddings con cache) e organizza migliaia di recensioni con HDBSCAN/PCA; FastAPI espone endpoint serverless e veloci. Un LLM distilla i cluster in sintesi e Personas con fallback sicuro, mentre il frontend Next.js/TypeScript offre filtri millisecond-level e grafici interattivi per decisioni immediate.",
     tags: [
-      // Frontend & infra
-      "Next.js 14",
-      "React 18",
-      "TypeScript",
-      "Tailwind CSS",
-      "Recharts",
-      "Vercel",
-      // Backend & data
-      "FastAPI",
-      "Python",
-      "Pandas",
-      "HDBSCAN",
-      "PCA",
-      "TF-IDF",
-      // LLM & embeddings
-      "LLM (Claude)",
-      "Voyage AI",
-      "Serverless Functions"
+      "Python", "Pandas", "HDBSCAN", "PCA", "TF-IDF",
+      "LLM", "Voyage AI",
+      "FastAPI", "Serverless Functions",
+      "Next.js", "React", "TypeScript", "Tailwind CSS"
     ],
     image: "/images/projects/InsightSuite.png",
     links: {
       demo: "https://michelemiranda.com/InsightSuite",
-      github: "https://github.com/HopelessMike/InsightSuite"
+      github: "https://github.com/HopelessMike/InsightSuite",
     },
     features: [
-      "Filtri e ricerca istantanei su migliaia di recensioni",
-      "Backend FastAPI serverless (endpoint /reviews, /health)",
-      "Pipeline Python: cleaning, sentiment, embeddings (cache), clustering",
-      "Riassunti di cluster e Personas generati con LLM (con fallback sicuro)",
-      "Grafici interattivi responsive (Recharts) e stato con Zustand"
-        ],
-    color: "from-emerald-500/20 to-sky-500/20"
+      "Ricerca/filtri istantanei",
+      "Clustering + sentiment pipeline",
+      "Personas e riassunti via LLM (fallback sicuro)",
+      "Grafici interattivi responsive",
+      "Deploy serverless su Vercel",
+    ],
+    color: "from-emerald-500/20 to-sky-500/20",
   },
   {
-    title: "HabitFlow - Wellness Tracker",
+    title: "LDR-Iconizer — Symbolic Story AI",
     description:
-      "Una bella applicazione di monitoraggio delle abitudini che aiuta gli utenti a costruire e mantenere routine quotidiane con visualizzazione intuitiva dei progressi.",
+      "Testo → 3 icone + titolo “system-file”: AI multilingue con JSON blindato.",
     longDescription:
-      "HabitFlow rende piacevole la costruzione di abitudini con la sua interfaccia pulita e funzionalità di monitoraggio complete. Gli utenti possono impostare obiettivi, monitorare i progressi e visualizzare il loro percorso verso abitudini migliori con analisi dettagliate e insights motivazionali.",
-    tags: ["Flutter", "Firebase", "Analytics", "UI/UX"],
-    image: "/images/projects/habit-tracker.png",
+      "Un endpoint Next.js orchestra language-detect e prompt engineering su OpenAI tramite Vercel AI SDK; Zod impone uno schema JSON solido. Un motore ibrido mappa concetti su 120+ Lucide Icons bilanciando letterale/astratto, con streaming, retry e fallback per risultati robusti e una UI dal tocco terminal-vibes.",
+    tags: [
+      "OpenAI", "Vercel", "Prompt Engineering", "Language Detection",
+      "Next.js", "React", "TypeScript"
+    ],
+    image: "/images/projects/ldr-icons.png",
     links: {
-      demo: "#",
-      github: "#",
+      demo: "https://michelemiranda.com/ldr-icons",
+      github: "https://github.com/HopelessMike/LDR_ICONS",
     },
-    features: ["Monitoraggio Abitudini", "Analisi Progressi", "Impostazione Obiettivi", "Report Visivi"],
-    color: "from-blue-500/20 to-cyan-500/20",
+    features: [
+      "Prompt multilingue auto-detect",
+      "Output JSON con Zod (3 simboli unici)",
+      "Mapping intelligente su 120+ icone",
+      "Streaming LLM + retry/timeout",
+      "UI distopica con feedback audio",
+    ],
+    color: "from-rose-500/20 to-cyan-500/20",
   },
   {
     title: "Film Fan Finder",
