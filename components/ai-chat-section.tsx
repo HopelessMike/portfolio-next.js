@@ -526,10 +526,10 @@ export default function AIChatSection() {
           style={{ opacity: 1 }}
         >
           <motion.h2 variants={itemVariants} className="text-3xl md:text-4xl font-heading font-bold mb-4">
-            Chatta con <span className="text-gradient">MicheleBot</span>
+            Chatta con <span className="text-gradient">MikeBot</span>
           </motion.h2>
           <motion.p variants={itemVariants} className="text-gray-300 max-w-2xl mx-auto">
-            Scopri il profilo professionale di Michele attraverso l'AI Assistant
+            Scopri il mio profilo professionale attraverso l'AI Assistant
           </motion.p>
           <motion.div
             variants={itemVariants}
@@ -551,8 +551,8 @@ export default function AIChatSection() {
                   <Bot className="w-5 h-5 text-white" />
                 </div>
                 <div>
-                  <h3 className="font-medium">MicheleBot</h3>
-                  <p className="text-xs text-gray-400">AI Assistant powered by GPT</p>
+                  <h3 className="font-medium">MikeBot</h3>
+                  <p className="text-xs text-gray-400">AI Assistant</p>
                 </div>
               </div>
               <button
@@ -590,7 +590,7 @@ export default function AIChatSection() {
                       ) : (
                         <User size={16} className="text-secondary" />
                       )}
-                      <span className="text-xs font-medium">{message.role === "assistant" ? "MicheleBot" : "Tu"}</span>
+                      <span className="text-xs font-medium">{message.role === "assistant" ? "MikeBot" : "Tu"}</span>
                     </div>
                     <div
                       className="text-sm rich-text"
@@ -610,7 +610,7 @@ export default function AIChatSection() {
                   <div className="max-w-[80%] rounded-2xl p-3 bg-card/50 text-white">
                     <div className="flex items-center gap-2 mb-1">
                       <Bot size={16} className="text-primary" />
-                      <span className="text-xs font-medium">MicheleBot</span>
+                      <span className="text-xs font-medium">MikeBot</span>
                     </div>
                     <div className="flex gap-1">
                       <span
