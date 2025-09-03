@@ -90,7 +90,7 @@ export default function ContactSection() {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="space-y-8"
           >
-            <div className="glass p-6 flex items-start space-x-4">
+            <div className="neomorphic p-6 flex items-start space-x-4">
               <div className="p-3 rounded-full bg-primary/20">
                 <Mail className="w-6 h-6 text-primary" />
               </div>
@@ -100,7 +100,7 @@ export default function ContactSection() {
               </div>
             </div>
 
-            <div className="glass p-6 flex items-start space-x-4">
+            <div className="neomorphic p-6 flex items-start space-x-4">
               <div className="p-3 rounded-full bg-secondary/20">
                 <Phone className="w-6 h-6 text-secondary" />
               </div>
@@ -110,7 +110,7 @@ export default function ContactSection() {
               </div>
             </div>
 
-            <div className="glass p-6 flex items-start space-x-4">
+            <div className="neomorphic p-6 flex items-start space-x-4">
               <div className="p-3 rounded-full bg-foreground/20">
                 <LinkIcon className="w-6 h-6 text-foreground" />
               </div>
@@ -127,7 +127,7 @@ export default function ContactSection() {
               </div>
             </div>
 
-            <div className="glass p-6 flex items-start space-x-4">
+            <div className="neomorphic p-6 flex items-start space-x-4">
               <div className="p-3 rounded-full bg-accent/20">
                 <MapPin className="w-6 h-6 text-accent" />
               </div>

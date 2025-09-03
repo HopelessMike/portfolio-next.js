@@ -118,7 +118,6 @@ export default function ProjectsSection() {
   const isInView = useInView(ref, { once: false, amount: 0.1, fallback: true })
   const controls = useAnimation()
   const [activeIndex, setActiveIndex] = useState(0)
-  const [isExpanded, setIsExpanded] = useState(false)
   const projectsRef = useRef<HTMLDivElement>(null)
   const [dragConstraints, setDragConstraints] = useState({ left: 0, right: 0 })
 
@@ -278,16 +277,8 @@ export default function ProjectsSection() {
                     animate={{ height: "auto" }}
                     transition={{ duration: 0.3 }}
                   >
-                    {isExpanded ? projects[activeIndex].longDescription : projects[activeIndex].description}
+                    {projects[activeIndex].longDescription}
                   </motion.p>
-
-                  <motion.button
-                    onClick={() => setIsExpanded(!isExpanded)}
-                    className="text-sm text-primary hover:text-secondary transition-colors"
-                    whileHover={{ x: 5 }}
-                  >
-                    {isExpanded ? "Mostra meno" : "Leggi di più"}
-                  </motion.button>
 
                   <div className="flex flex-wrap gap-2">
                     {projects[activeIndex].tags.map((tag) => (
@@ -430,7 +421,7 @@ export default function ProjectsSection() {
             .map((project, idx) => (
               <motion.div
                 key={idx}
-                className="glass p-5 rounded-xl hover:bg-card/30 transition-all cursor-pointer project-card"
+                className="neomorphic p-5 rounded-xl hover:bg-card/30 transition-all cursor-pointer project-card"
                 variants={cardVariants}
                 whileHover={{ y: -5, scale: 1.02 }}
                 onClick={() => setActiveIndex(projects.findIndex((p) => p.title === project.title))}

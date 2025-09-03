@@ -12,7 +12,7 @@ const initialMessages = [
   {
     role: "assistant",
     content:
-      "👋 Ciao! Sono Mike, il tuo assistente virtuale. Chiedimi dell'esperienza lavorativa o delle competenze di Michele!",
+      "👋 Ciao! Sono l'assistente AI di Michele Miranda. Chiedimi dell'esperienza lavorativa, competenze o servizi di Michele!",
   },
 ]
 
@@ -208,6 +208,7 @@ export default function AIChatSection() {
   const [messages, setMessages] = useState(initialMessages)
   const [input, setInput] = useState("")
   const [isTyping, setIsTyping] = useState(false)
+  const [conversationHistory, setConversationHistory] = useState<Array<{role: string, content: string}>>([])
   const messagesEndRef = useRef<HTMLDivElement>(null)
   const chatMessagesRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLInputElement>(null)
@@ -238,33 +239,44 @@ export default function AIChatSection() {
         setMessages((prev) => [...prev, userMessage])
         setIsTyping(true)
 
-        // Simulate AI response
-        setTimeout(() => {
-          let response
-          const lowercaseMessage = message.toLowerCase()
+        // AI response via API with streaming
+        setTimeout(async () => {
+          const updatedHistory = [...conversationHistory, { role: "user", content: message }]
+          setConversationHistory(updatedHistory)
+          
+          try {
+            await handleStreamingResponse(message, updatedHistory)
+            
+          } catch (error) {
+            console.error('Service message chat error:', error)
+            
+            // Fallback to offline responses
+            let response
+            const lowercaseMessage = message.toLowerCase()
 
-          if (lowercaseMessage.includes("sviluppo ai")) {
-            response = aiDevelopmentResponses[0]
-          } else if (lowercaseMessage.includes("automazione processi")) {
-            response = processAutomationResponses[0]
-          } else if (lowercaseMessage.includes("analisi dati")) {
-            response = dataAnalyticsResponses[0]
-          } else if (lowercaseMessage.includes("chatbot")) {
-            response = chatbotResponses[0]
-          } else if (lowercaseMessage.includes("software personalizzato")) {
-            response = customSoftwareResponses[0]
-          } else if (lowercaseMessage.includes("gestione dati")) {
-            response = dataManagementResponses[0]
-          } else {
-            response = {
-              role: "assistant",
-              content:
-                "Grazie per il tuo interesse! Sarei felice di discutere questo servizio con te. Che requisiti specifici hai?",
+            if (lowercaseMessage.includes("sviluppo ai")) {
+              response = aiDevelopmentResponses[0]
+            } else if (lowercaseMessage.includes("automazione processi")) {
+              response = processAutomationResponses[0]
+            } else if (lowercaseMessage.includes("analisi dati")) {
+              response = dataAnalyticsResponses[0]
+            } else if (lowercaseMessage.includes("chatbot")) {
+              response = chatbotResponses[0]
+            } else if (lowercaseMessage.includes("software personalizzato")) {
+              response = customSoftwareResponses[0]
+            } else if (lowercaseMessage.includes("gestione dati")) {
+              response = dataManagementResponses[0]
+            } else {
+              response = {
+                role: "assistant",
+                content:
+                  "Grazie per il tuo interesse! Sarei felice di discutere questo servizio con te. Che requisiti specifici hai?",
+              }
             }
-          }
 
-          setMessages((prev) => [...prev, response])
-          setIsTyping(false)
+            setMessages((prev) => [...prev, response])
+            setIsTyping(false)
+          }
         }, 1500)
       }
     }
@@ -280,15 +292,104 @@ export default function AIChatSection() {
     }
   }
 
-  const handleSubmit = (e: React.FormEvent) => {
+  // Helper function to handle streaming responses
+  const handleStreamingResponse = async (userMessage: string, updatedHistory: any[]) => {
+    try {
+      const response = await fetch('/api/chat', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          message: userMessage,
+          conversationHistory: updatedHistory,
+          stream: true
+        }),
+      })
+
+      if (!response.ok) {
+        throw new Error('API call failed')
+      }
+
+      // Create placeholder for streaming message
+      const streamingMessage = { role: "assistant", content: "" }
+      setMessages((prev) => [...prev, streamingMessage])
+      setIsTyping(false)
+
+      // Process the streaming response
+      const reader = response.body?.getReader()
+      const decoder = new TextDecoder()
+
+      if (reader) {
+        let accumulatedContent = ""
+        
+        while (true) {
+          const { done, value } = await reader.read()
+          
+          if (done) break
+
+          const chunk = decoder.decode(value, { stream: true })
+          const lines = chunk.split('\n')
+
+          for (const line of lines) {
+            if (line.startsWith('data: ')) {
+              const data = line.slice(6).trim()
+              
+              if (data) {
+                try {
+                  const parsed = JSON.parse(data)
+                  const content = parsed.content
+                  
+                  if (content) {
+                    accumulatedContent += content
+                    
+                    // Update the message in real-time
+                    setMessages((prev) => {
+                      const newMessages = [...prev]
+                      const lastMessage = newMessages[newMessages.length - 1]
+                      if (lastMessage.role === 'assistant') {
+                        lastMessage.content = accumulatedContent
+                      }
+                      return newMessages
+                    })
+                  }
+                } catch (parseError) {
+                  // Skip invalid JSON
+                }
+              }
+            }
+          }
+        }
+
+        // Update conversation history with final response
+        const finalMessage = { role: "assistant", content: accumulatedContent }
+        setConversationHistory(prev => {
+          const newHistory = [...prev, finalMessage]
+          return newHistory.slice(-10)
+        })
+      }
+      
+    } catch (error) {
+      console.error('Streaming error:', error)
+      throw error
+    }
+  }
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     e.stopPropagation()
 
     if (!input.trim()) return
 
-    // Add user message
     const userMessage = { role: "user", content: input }
-    setMessages((prev) => [...prev, userMessage])
+    const inputValue = input // Store input value before clearing
+    const newMessages = [...messages, userMessage]
+    setMessages(newMessages)
+    
+    // Update conversation history for API call
+    const updatedHistory = [...conversationHistory, userMessage]
+    setConversationHistory(updatedHistory)
+    
     setInput("")
     setIsTyping(true)
 
@@ -297,10 +398,15 @@ export default function AIChatSection() {
       inputRef.current?.focus()
     }, 100)
 
-    // Simulate AI response
-    setTimeout(() => {
+    try {
+      await handleStreamingResponse(inputValue, updatedHistory)
+      
+    } catch (error) {
+      console.error('Chat error:', error)
+      
+      // Fallback to offline logic
       let response
-      const lowercaseInput = input.toLowerCase()
+      const lowercaseInput = inputValue.toLowerCase()
 
       if (lowercaseInput.includes("esperienza") || lowercaseInput.includes("lavoro")) {
         response = experienceResponses[0]
@@ -334,17 +440,24 @@ export default function AIChatSection() {
 
       setMessages((prev) => [...prev, response])
       setIsTyping(false)
-    }, 1500)
+    }
   }
 
-  const handleQuickQuestion = (question: string) => {
-    // Simulate user clicking a quick question
+  const handleQuickQuestion = async (question: string) => {
     const userMessage = { role: "user", content: question }
     setMessages((prev) => [...prev, userMessage])
+    
+    const updatedHistory = [...conversationHistory, userMessage]
+    setConversationHistory(updatedHistory)
     setIsTyping(true)
 
-    // Simulate AI response
-    setTimeout(() => {
+    try {
+      await handleStreamingResponse(question, updatedHistory)
+      
+    } catch (error) {
+      console.error('Quick question error:', error)
+      
+      // Fallback to offline responses
       let response
       const lowercaseQuestion = question.toLowerCase()
 
@@ -360,11 +473,12 @@ export default function AIChatSection() {
         setMessages((prev) => [...prev, response])
       }
       setIsTyping(false)
-    }, 1500)
+    }
   }
 
   const resetChat = () => {
     setMessages(initialMessages)
+    setConversationHistory([])
   }
 
   const containerVariants = {
@@ -397,13 +511,13 @@ export default function AIChatSection() {
   }
 
   return (
-    <section id="experience" className="py-20 md:py-32 relative bg-gradient-to-b from-card/50 to-background">
+    <section id="experience" className="py-20 md:py-32 relative">
       <div className="absolute inset-0 z-0 overflow-hidden">
         <div className="absolute top-1/3 right-1/4 w-64 h-64 bg-primary/5 rounded-full blur-3xl"></div>
         <div className="absolute bottom-1/3 left-1/4 w-64 h-64 bg-secondary/5 rounded-full blur-3xl"></div>
       </div>
 
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto px-4 relative z-10">
         <motion.div
           initial="hidden"
           animate={controls}
@@ -412,10 +526,10 @@ export default function AIChatSection() {
           style={{ opacity: 1 }}
         >
           <motion.h2 variants={itemVariants} className="text-3xl md:text-4xl font-heading font-bold mb-4">
-            Chatta con <span className="text-gradient">Mike</span>
+            Chatta con <span className="text-gradient">MicheleBot</span>
           </motion.h2>
           <motion.p variants={itemVariants} className="text-gray-300 max-w-2xl mx-auto">
-            Chiedi all'assistente virtuale delle mie competenze, progetti o servizi specifici.
+            Scopri il profilo professionale di Michele attraverso l'AI Assistant
           </motion.p>
           <motion.div
             variants={itemVariants}
@@ -425,7 +539,7 @@ export default function AIChatSection() {
 
         <div className="max-w-3xl mx-auto" ref={ref}>
           <motion.div
-            className="glass rounded-2xl overflow-hidden chat-element"
+            className="neomorphic rounded-2xl overflow-hidden chat-element"
             variants={chatElementVariants}
             initial="hidden"
             animate={isInView ? "visible" : "hidden"}
@@ -437,8 +551,8 @@ export default function AIChatSection() {
                   <Bot className="w-5 h-5 text-white" />
                 </div>
                 <div>
-                  <h3 className="font-medium">Mike</h3>
-                  <p className="text-xs text-gray-400">Assistente Virtuale</p>
+                  <h3 className="font-medium">MicheleBot</h3>
+                  <p className="text-xs text-gray-400">AI Assistant powered by GPT</p>
                 </div>
               </div>
               <button
@@ -476,7 +590,7 @@ export default function AIChatSection() {
                       ) : (
                         <User size={16} className="text-secondary" />
                       )}
-                      <span className="text-xs font-medium">{message.role === "assistant" ? "Mike" : "Tu"}</span>
+                      <span className="text-xs font-medium">{message.role === "assistant" ? "MicheleBot" : "Tu"}</span>
                     </div>
                     <div
                       className="text-sm rich-text"
@@ -496,7 +610,7 @@ export default function AIChatSection() {
                   <div className="max-w-[80%] rounded-2xl p-3 bg-card/50 text-white">
                     <div className="flex items-center gap-2 mb-1">
                       <Bot size={16} className="text-primary" />
-                      <span className="text-xs font-medium">Mike</span>
+                      <span className="text-xs font-medium">MicheleBot</span>
                     </div>
                     <div className="flex gap-1">
                       <span

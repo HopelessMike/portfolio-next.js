@@ -13,7 +13,7 @@ export default function Footer() {
   return (
     <footer className="py-8 relative">
       <div className="container mx-auto px-4">
-        <div className="glass p-8 rounded-2xl">
+        <div className="neomorphic p-8 rounded-2xl">
           <div className="grid md:grid-cols-3 gap-8">
             <div>
               <h3 className="text-2xl font-heading font-bold mb-4 text-gradient">Michele Miranda</h3>

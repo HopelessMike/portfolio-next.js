@@ -145,7 +145,7 @@ export default function ServicesSection() {
       <div className="absolute top-1/4 right-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl"></div>
       <div className="absolute bottom-1/4 left-1/4 w-96 h-96 bg-secondary/10 rounded-full blur-3xl"></div>
 
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto px-4 relative z-10">
         {/* Header */}
         <motion.div
           className="text-center mb-16"
@@ -177,19 +177,15 @@ export default function ServicesSection() {
                 className={`${getCardSize(service.size)} group relative cursor-pointer`}
                 onClick={() => handleServiceClick(service)}
               >
-                <div className="glass rounded-2xl md:rounded-3xl p-4 md:p-6 lg:p-8 border border-white/10 hover:border-primary/40 hover:shadow-lg hover:shadow-primary/20 transition-all duration-500 relative overflow-hidden h-full flex flex-col justify-between">
+                <div className="neomorphic rounded-2xl md:rounded-3xl p-4 md:p-6 lg:p-8 hover:shadow-lg hover:shadow-primary/30 group-hover:shadow-2xl group-hover:shadow-primary/40 transition-all duration-500 relative overflow-hidden h-full flex flex-col justify-between">
                   {/* Background Gradient */}
                   <div
-                    className={`absolute inset-0 bg-gradient-to-br ${service.color} opacity-10 group-hover:opacity-20 transition-opacity duration-500`}
+                    className={`absolute inset-0 bg-gradient-to-br ${service.color} opacity-10 group-hover:opacity-30 transition-opacity duration-500`}
                   ></div>
 
                   {/* Floating Icon Background */}
                   <div className="absolute -top-4 -right-4 w-16 h-16 md:w-24 md:h-24 rounded-full bg-gradient-to-br from-white/5 to-white/10 blur-xl group-hover:scale-110 transition-transform duration-500"></div>
 
-                  {/* Clickable Indicator */}
-                  <div className="absolute top-3 right-3 md:top-4 md:right-4 w-5 h-5 md:w-6 md:h-6 rounded-full bg-primary/20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <MessageSquare className="w-2.5 h-2.5 md:w-3 md:h-3 text-primary" />
-                  </div>
 
                   <div className="relative z-10 flex flex-col h-full">
                     {/* Icon */}
@@ -208,7 +204,7 @@ export default function ServicesSection() {
                       </h3>
                       <p className="text-gray-400 text-sm md:text-base mb-2">{service.subtitle}</p>
                       <p className="text-xs text-primary/70 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                        Clicca per chattare su questo servizio
+                        Clicca per saperne di più su questo servizio
                       </p>
                     </div>
 

@@ -32,7 +32,7 @@ export default function HeroSectionNew() {
     <section
       id="home"
       ref={containerRef}
-      className="relative min-h-screen flex items-center justify-center overflow-hidden pb-20"
+      className="relative min-h-screen flex items-center justify-center overflow-hidden pb-20 pt-24 lg:pt-28"
     >
       {/* Animated Background Grid */}
       <div className="absolute inset-0 z-0">
@@ -65,8 +65,9 @@ export default function HeroSectionNew() {
 
       {/* Mouse Follower Effect - Desktop Only */}
       <motion.div
-        className="fixed w-96 h-96 rounded-full pointer-events-none z-0 hidden lg:block"
+        className="fixed w-96 h-96 rounded-full pointer-events-none hidden lg:block"
         style={{
+          zIndex: 5,
           background: "radial-gradient(circle, rgba(0, 255, 100, 0.1) 0%, transparent 70%)",
           left: mousePosition.x - 192,
           top: mousePosition.y - 192,
@@ -83,7 +84,7 @@ export default function HeroSectionNew() {
 
       <motion.div style={{ opacity, scale, y }} className="container mx-auto px-4 lg:pl-20 relative z-10">
         {/* Mobile Layout */}
-        <div className="lg:hidden flex flex-col items-center text-center space-y-4 pt-16">
+        <div className="lg:hidden flex flex-col items-center text-center space-y-4 pt-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
