@@ -238,7 +238,7 @@ export default function HeroSectionNew() {
               transition={{ duration: 1, delay: 0.5 }}
               className="relative"
             >
-              <div className="relative glass rounded-3xl p-8 border border-white/10 overflow-hidden">
+              <div className="relative neomorphic rounded-3xl p-8 border border-white/10 overflow-hidden">
                 <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-primary/20 to-transparent rounded-full blur-2xl"></div>
 
                 <div

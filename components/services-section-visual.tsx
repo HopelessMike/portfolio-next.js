@@ -208,12 +208,6 @@ export default function ServicesSection() {
                       </p>
                     </div>
 
-                    {/* Arrow Icon */}
-                    <div className="mt-3 md:mt-4 self-end">
-                      <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-white/10 flex items-center justify-center group-hover:bg-primary/30 group-hover:scale-110 transition-all duration-300">
-                        <ArrowRight className="w-4 h-4 md:w-5 md:h-5 text-gray-400 group-hover:text-white transition-colors duration-300" />
-                      </div>
-                    </div>
                   </div>
 
                   {/* Hover Glow Effect */}
