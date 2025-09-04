@@ -9,6 +9,16 @@ export default function LoadingScreen({ onLoadingComplete = () => {} }: { onLoad
     if (typeof window === "undefined") {
       return true;
     }
+    
+    // Non mostrare loading screen per i microfrontends
+    const currentPath = window.location.pathname;
+    const microfrontendPaths = ['/InsightSuite', '/ldr-icons'];
+    const isMicrofrontend = microfrontendPaths.some(path => currentPath.startsWith(path));
+    
+    if (isMicrofrontend) {
+      return false;
+    }
+    
     return !sessionStorage.getItem("hasVisitedBefore");
   });
 
@@ -24,7 +34,7 @@ export default function LoadingScreen({ onLoadingComplete = () => {} }: { onLoad
     }, 3000);
 
     return () => clearTimeout(timer);
-  }, []);
+  }, [loading, onLoadingComplete]);
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -70,31 +80,47 @@ export default function LoadingScreen({ onLoadingComplete = () => {} }: { onLoad
 
   /** ✨ Effetto particellare – identico a Cinema Constellations */
   const particleVariants = {
-    animate: (i: number) => ({
-      y: [0, -80, 0],
-      x: [0, 40 * (i % 2 === 0 ? 1 : -1), -40 * (i % 2 === 0 ? 1 : -1), 0],
-      opacity: [0, 0.8, 0.8, 0],
-      scale: [0.8, 1.2, 0.8],
-      transition: {
-        duration: 8 + i * 0.5,
-        repeat: Number.POSITIVE_INFINITY,
-        ease: "easeInOut",
-        delay: Math.random() * 1.5,
-      },
-    }),
+    animate: (i: number) => {
+      // Funzione per delay deterministico basato sull'indice
+      const getSeededDelay = (index: number) => {
+        const x = Math.sin(index * 123.456) * 10000;
+        const normalizedValue = x - Math.floor(x);
+        return normalizedValue * 1.5;
+      };
+
+      return {
+        y: [0, -80, 0],
+        x: [0, 40 * (i % 2 === 0 ? 1 : -1), -40 * (i % 2 === 0 ? 1 : -1), 0],
+        opacity: [0, 0.8, 0.8, 0],
+        scale: [0.8, 1.2, 0.8],
+        transition: {
+          duration: 8 + i * 0.5,
+          repeat: Number.POSITIVE_INFINITY,
+          ease: "easeInOut",
+          delay: getSeededDelay(i),
+        },
+      };
+    },
   } as const
 
   const memoizedParticles = useMemo(() => {
+    // Funzione per generare valori deterministici basati sull'indice
+    const getSeededValue = (index: number, seed: number, min: number, max: number) => {
+      const x = Math.sin(index * seed) * 10000;
+      const normalizedValue = x - Math.floor(x);
+      return Math.round((min + normalizedValue * (max - min)) * 1000) / 1000;
+    };
+
     return Array.from({ length: 25 }).map((_, i) => (
       <motion.div
         key={i}
         className="absolute rounded-full"
         style={{
-          width: `${Math.random() * 9 + 6}px`,
-          height: `${Math.random() * 9 + 6}px`,
-          background: `radial-gradient(circle, ${Math.random() > 0.5 ? "#8b5cf6" : "#06b6d4"} 0%, transparent 70%)`,
-          left: `${Math.random() * 100}%`,
-          top: `${Math.random() * 100}%`,
+          width: `${getSeededValue(i, 12.9898, 6, 15)}px`,
+          height: `${getSeededValue(i, 78.233, 6, 15)}px`,
+          background: `radial-gradient(circle, ${getSeededValue(i, 43.758, 0, 1) > 0.5 ? "#8b5cf6" : "#06b6d4"} 0%, transparent 70%)`,
+          left: `${getSeededValue(i, 37.719, 0, 100)}%`,
+          top: `${getSeededValue(i, 95.311, 0, 100)}%`,
           filter: "blur(0.5px)",
         }}
         custom={i}
