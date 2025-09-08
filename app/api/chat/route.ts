@@ -15,9 +15,17 @@ export async function POST(request: NextRequest) {
         const safetyCheck = await safetyClassifier.classifyContent(message)
         
         if (!safetyCheck.isAppropriate) {
+          if (stream) {
+            return sseResponseFromText(
+              safetyCheck.suggestedResponse ||
+                "Sono qui per discutere dell'esperienza professionale e dei servizi di Michele Miranda. Potresti chiedermi qualcosa sulle sue competenze in automazione AI o sulla sua esperienza progettuale invece?"
+            )
+          }
           return NextResponse.json({
-            response: safetyCheck.suggestedResponse || "Sono qui per discutere dell'esperienza professionale e dei servizi di Michele Miranda. Potresti chiedermi qualcosa sulle sue competenze in automazione AI o sulla sua esperienza progettuale invece?",
-            isOffline: false
+            response:
+              safetyCheck.suggestedResponse ||
+              "Sono qui per discutere dell'esperienza professionale e dei servizi di Michele Miranda. Potresti chiedermi qualcosa sulle sue competenze in automazione AI o sulla sua esperienza progettuale invece?",
+            isOffline: false,
           })
         }
       } catch (safetyError) {
@@ -29,9 +37,12 @@ export async function POST(request: NextRequest) {
     // Check if OpenAI API key is available
     if (!process.env.OPENAI_API_KEY) {
       console.log('OpenAI API token not found, falling back to offline responses')
+      if (stream) {
+        return sseResponseFromText(getOfflineResponse(message))
+      }
       return NextResponse.json({
         response: getOfflineResponse(message),
-        isOffline: true
+        isOffline: true,
       })
     }
 
@@ -127,10 +138,12 @@ export async function POST(request: NextRequest) {
       }
     } catch (openaiError) {
       console.error('OpenAI error, falling back to offline responses:', openaiError)
-      
+      if (stream) {
+        return sseResponseFromText(getOfflineResponse(message))
+      }
       return NextResponse.json({
         response: getOfflineResponse(message),
-        isOffline: true
+        isOffline: true,
       })
     }
 
@@ -152,6 +165,27 @@ export async function POST(request: NextRequest) {
       isOffline: true
     }, { status: 500 })
   }
+}
+
+// Helper to return a single-message SSE stream compatible with the frontend reader
+function sseResponseFromText(text: string): Response {
+  const encoder = new TextEncoder()
+  const readable = new ReadableStream({
+    start(controller) {
+      controller.enqueue(encoder.encode(`data: ${JSON.stringify({ content: text })}\n\n`))
+      controller.close()
+    },
+  })
+
+  return new Response(readable, {
+    headers: {
+      'Content-Type': 'text/event-stream',
+      'Cache-Control': 'no-cache, no-transform',
+      'Connection': 'keep-alive',
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Headers': 'Content-Type',
+    },
+  })
 }
 
 // Basic fallback safety check (used when OpenAI API is not available)

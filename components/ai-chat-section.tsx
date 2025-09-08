@@ -316,6 +316,33 @@ export default function AIChatSection() {
       setMessages((prev) => [...prev, streamingMessage])
       setIsTyping(false)
 
+      const contentType = response.headers.get('Content-Type') || ''
+
+      // If not an SSE response, handle as JSON fallback
+      if (!contentType.toLowerCase().includes('text/event-stream')) {
+        const data = await response.json().catch(() => ({}))
+        const content = data?.response ?? data?.content ?? ''
+
+        setMessages((prev) => {
+          const newMessages = [...prev]
+          const lastMessage = newMessages[newMessages.length - 1]
+          if (lastMessage && lastMessage.role === 'assistant') {
+            lastMessage.content = content || "Mi dispiace, non riesco a rispondere ora. Riprova più tardi."
+          }
+          return newMessages
+        })
+
+        // Update conversation history with final response
+        const finalText = content || "Mi dispiace, non riesco a rispondere ora. Riprova più tardi."
+        const finalMessage = { role: "assistant", content: finalText }
+        setConversationHistory(prev => {
+          const newHistory = [...prev, finalMessage]
+          return newHistory.slice(-10)
+        })
+
+        return
+      }
+
       // Process the streaming response
       const reader = response.body?.getReader()
       const decoder = new TextDecoder()
@@ -359,6 +386,24 @@ export default function AIChatSection() {
               }
             }
           }
+        }
+
+        // If nothing was streamed, show a default friendly fallback
+        if (!accumulatedContent.trim()) {
+          const fallbackText = "Mi dispiace, non riesco a rispondere ora. Riprova più tardi."
+          setMessages((prev) => {
+            const newMessages = [...prev]
+            const lastMessage = newMessages[newMessages.length - 1]
+            if (lastMessage && lastMessage.role === 'assistant') {
+              lastMessage.content = fallbackText
+            }
+            return newMessages
+          })
+          setConversationHistory(prev => {
+            const newHistory = [...prev, { role: 'assistant', content: fallbackText }]
+            return newHistory.slice(-10)
+          })
+          return
         }
 
         // Update conversation history with final response
