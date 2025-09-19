@@ -6,11 +6,11 @@ export const professionalContext = `
 # BASE DI CONOSCENZA: Michele Miranda - Esperto di Automazione AI
 
 ## Profilo Professionale
-Michele Miranda è un Esperto di Automazione AI con oltre 4 anni di esperienza specialistica in intelligenza artificiale, machine learning e ottimizzazione dei processi. Unisce competenze tecniche di alto livello a un acume strategico per aiutare le organizzazioni a sbloccare il loro pieno potenziale attraverso soluzioni di automazione intelligente.
+Michele Miranda è un Esperto di Automazione AI con oltre 4 anni di esperienza specialistica in intelligenza artificiale e ottimizzazione dei processi. Unisce competenze tecniche di alto livello a un acume strategico per aiutare le organizzazioni a sbloccare il loro pieno potenziale attraverso soluzioni di automazione intelligente.
 
 ## Aree di Competenza Principali
 
-### Intelligenza Artificiale & Machine Learning
+### Intelligenza Artificiale
 - **Sviluppo AI Generativa**: Esperto nella progettazione e implementazione di soluzioni GenAI basate su Large Language Models (LLM).
 - **Sistemi AI Agentici**: Specializzato nella creazione di agenti AI autonomi per l'automazione intelligente dei flussi di lavoro.
 - **Fine-tuning & Prompt Engineering**: Competenze avanzate nell'ottimizzazione delle performance dei modelli AI tramite prompt design strategico e fine-tuning via API.
@@ -49,7 +49,6 @@ Michele Miranda è un Esperto di Automazione AI con oltre 4 anni di esperienza s
 - **Applicazioni GenAI Personalizzate**: Soluzioni di AI generativa su misura per specifiche esigenze di business.
 - **Integrazione LLM**: Integrazione fluida di Large Language Models in sistemi esistenti.
 - **Sviluppo Agenti AI**: Creazione di agenti AI autonomi per l'automazione dei flussi di lavoro.
-- **Modelli di Machine Learning**: Soluzioni ML personalizzate per previsione, classificazione e ottimizzazione.
 - **Natural Language Processing**: Sistemi avanzati per l'analisi e la comprensione del testo.
 
 #### 2. Automazione dei Processi
@@ -60,11 +59,8 @@ Michele Miranda è un Esperto di Automazione AI con oltre 4 anni di esperienza s
 - **Script di Automazione Custom**: Soluzioni di automazione su misura basate su Python.
 
 #### 3. Analisi e Gestione Dati
-- **Architettura Database**: Progettazione e ottimizzazione di database scalabili ed efficienti.
 - **Sviluppo Data Pipeline**: Flussi di lavoro ETL/ELT automatizzati per l'elaborazione dei dati.
-- **Analisi in Tempo Reale**: Elaborazione di dati live e generazione di insight istantanei.
 - **Visualizzazione Dati**: Dashboard interattive e soluzioni di reporting complete.
-- **Migrazione Dati**: Progetti di modernizzazione e migrazione dati.
 - **Data Governance**: Framework per la qualità e la conformità dei dati a livello enterprise.
 
 #### 4. AI Conversazionale & Chatbot
@@ -72,7 +68,6 @@ Michele Miranda è un Esperto di Automazione AI con oltre 4 anni di esperienza s
 - **Soluzioni Abilitate alla Voce**: Assistenti AI con capacità avanzate di riconoscimento vocale.
 - **Training e Fine-tuning Personalizzati**: Sistemi AI adattati alla conoscenza e al tono specifici del business.
 - **Supporto Clienti 24/7**: Servizio clienti automatizzato con comprensione di livello umano.
-- **Lead Generation**: Sistemi intelligenti per la qualificazione e il nutrimento dei prospect.
 - **Integrazione Knowledge Base**: Automazione di FAQ e sistemi di conoscenza aziendale.
 
 #### 5. Sviluppo Software Personalizzato
@@ -80,7 +75,6 @@ Michele Miranda è un Esperto di Automazione AI con oltre 4 anni di esperienza s
 - **Integrazione di Sistemi**: Connessione di sistemi legacy con piattaforme moderne.
 - **Applicazioni Cloud-native**: Soluzioni scalabili costruite per i moderni ambienti cloud.
 - **Design & Ottimizzazione Database**: Soluzioni di data storage ad alte prestazioni.
-- **DevOps & CI/CD**: Pipeline di deployment automatizzato e integrazione continua.
 
 ### Progetti in Evidenza
 

@@ -191,7 +191,7 @@ export default function ProjectsSection() {
   }
 
   return (
-    <section id="projects" className="py-20 md:py-32 relative hidden md:block">
+    <section id="projects" className="py-20 md:py-32 relative">
       <div className="absolute inset-0 z-0">
         <div className="absolute top-0 right-0 w-full h-full bg-[radial-gradient(circle_at_70%_30%,rgba(var(--primary),0.1),transparent_40%)]"></div>
       </div>

@@ -12,10 +12,11 @@ export default function LoadingScreen({ onLoadingComplete = () => {} }: { onLoad
     
     // Non mostrare loading screen per i microfrontends
     const currentPath = window.location.pathname;
-    const microfrontendPaths = ['/InsightSuite', '/ldr-icons'];
-    const isMicrofrontend = microfrontendPaths.some(path => currentPath.startsWith(path));
+    const skipLoadingPaths = ['/InsightSuite', '/ldr-icons', '/cinema-constellations'];
+    const normalizedPath = currentPath.toLowerCase();
+    const shouldSkipLoading = skipLoadingPaths.some((path) => normalizedPath.startsWith(path.toLowerCase()));
     
-    if (isMicrofrontend) {
+    if (shouldSkipLoading) {
       return false;
     }
     
@@ -196,3 +197,4 @@ export default function LoadingScreen({ onLoadingComplete = () => {} }: { onLoad
     </AnimatePresence>
   )
 }
+

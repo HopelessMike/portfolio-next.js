@@ -113,7 +113,6 @@ const dataAnalyticsResponses = [
 **Visualizzazione Dati** - Dashboard e report interattivi
 **Business Intelligence** - Insights strategici dai tuoi dati
 **Metriche Performance** - Monitoraggio e ottimizzazione KPI
-**Analisi Real-time** - Elaborazione e monitoraggio dati in tempo reale
 
 **Tecnologie:**
 • Python (Pandas, NumPy, Scikit-learn)
@@ -137,7 +136,6 @@ const chatbotResponses = [
 **Funzionalità:**
 • Integrazione con CRM e sistemi di business
 • supporto clienti automatizzato 24/7
-• Lead generation
 • FAQ automation and knowledge base
 
 
@@ -156,9 +154,8 @@ const customSoftwareResponses = [
 **Design Database** - Architettura e gestione dati efficiente
 
 **Tecnologie:**
-• Backend: Python, SQL, MongoDB
+• Backend: Python, SQL
 • Cloud: Azure, Google Cloud Platform
-• DevOps: CI/CD pipelines
 
 Che tipo di soluzione software personalizzata stai cercando di costruire?`,
   },
@@ -171,16 +168,12 @@ const dataManagementResponses = [
 
 **Architettura Database** - Design di database scalabile ed efficiente
 **Automazione Pipeline Dati** - Flussi di lavoro di elaborazione dati ottimizzati
-**Analisi Real-time** - Elaborazione dati e insights in tempo reale
-**Sicurezza Dati** - Sicurezza e conformità di livello enterprise
 **Integrazione Cloud** - Soluzioni dati Azure e GCP
-**Servizi Migrazione** - Migrazione e modernizzazione dati senza interruzioni
 
 **Capacità:**
 • ETL/ELT pipeline development
 • Data warehouse design and optimization
 • Real-time streaming data processing
-• Data governance and quality assurance
 
 Quali sfide specifiche sui dati stai cercando di risolvere?`,
   },
@@ -188,18 +181,26 @@ Quali sfide specifiche sui dati stai cercando di risolvere?`,
 
 // Rich text formatting function
 const formatMessage = (content: string) => {
-  // Convert **text** to bold
-  let formatted = content.replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
+  let formatted = content.replace(/\r\n/g, "\n")
 
-  // Convert bullet points to proper list items
-  formatted = formatted.replace(/^• (.+)$/gm, "<li>$1</li>")
+  // Headings
+  formatted = formatted.replace(/^###\s*(.+)$/gm, '<h3 class="text-base font-semibold text-white mt-4">$1</h3>')
+  formatted = formatted.replace(/^##\s*(.+)$/gm, '<h2 class="text-lg font-semibold text-white mt-4">$1</h2>')
+  formatted = formatted.replace(/^#\s*(.+)$/gm, '<h2 class="text-lg font-semibold text-white mt-4">$1</h2>')
 
-  // Wrap consecutive list items in ul tags
-  formatted = formatted.replace(/(<li>.*<\/li>\s*)+/gs, "<ul>$&</ul>")
+  // Bold
+  formatted = formatted.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
 
-  // Convert line breaks to proper spacing
-  formatted = formatted.replace(/\n\n/g, "<br><br>")
-  formatted = formatted.replace(/\n/g, "<br>")
+  // Bullet lists
+  formatted = formatted.replace(/^\s*[-*]\s+(.+)$/gm, '<li class="leading-relaxed text-sm text-gray-200">$1</li>')
+
+  formatted = formatted.replace(/(?:<li class="leading-relaxed text-sm text-gray-200">.*<\/li>\s*)+/gs, (match) => {
+    return `<ul class="list-disc pl-5 space-y-1">${match}</ul>`
+  })
+
+  // Paragraph spacing
+  formatted = formatted.replace(/\n{2,}/g, '<br><br>')
+  formatted = formatted.replace(/\n/g, '<br>')
 
   return formatted
 }
@@ -556,7 +557,7 @@ export default function AIChatSection() {
   }
 
   return (
-    <section id="experience" className="py-20 md:py-32 relative">
+    <section id="ai-chat" className="py-20 md:py-32 relative">
       <div className="absolute inset-0 z-0 overflow-hidden">
         <div className="absolute top-1/3 right-1/4 w-64 h-64 bg-primary/5 rounded-full blur-3xl"></div>
         <div className="absolute bottom-1/3 left-1/4 w-64 h-64 bg-secondary/5 rounded-full blur-3xl"></div>
@@ -742,3 +743,4 @@ export default function AIChatSection() {
     </section>
   )
 }
+

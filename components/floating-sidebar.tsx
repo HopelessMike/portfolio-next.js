@@ -121,8 +121,8 @@ export default function FloatingSidebar() {
               className="fixed left-6 glass backdrop-blur-xl rounded-2xl border border-white/10 p-4"
               style={{
                 background: "rgba(10, 10, 15, 0.9)",
-                top: "35%",
-                transform: "translateY(50%)",
+                top: "50%",
+                transform: "translateY(-50%)",
                 zIndex: 50,
               }}
             >

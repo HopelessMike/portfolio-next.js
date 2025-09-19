@@ -46,7 +46,7 @@ QUANDO INCONTRI CONTENUTI INAPPROPRIATI:
 
 ARGOMENTI APPROPRIATI INCLUDONO:
 - Esperienza professionale, competenze, certificazioni di Michele
-- Servizi AI, machine learning e automazione
+- Servizi AI e automazione
 - Progetti tecnici e case studies
 - Opportunità di collaborazione business
 - Servizi di consulenza e sviluppo

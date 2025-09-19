@@ -86,7 +86,7 @@ export default function ServicesSection() {
   const handleServiceClick = (service: any) => {
     if (service.clickable) {
       // Scroll to AI chat section
-      const chatSection = document.getElementById("experience")
+      const chatSection = document.getElementById("ai-chat")
       if (chatSection) {
         chatSection.scrollIntoView({ behavior: "smooth" })
 
@@ -229,6 +229,18 @@ export default function ServicesSection() {
           transition={{ duration: 0.8, delay: 0.5 }}
         >
           <motion.button
+            onClick={() => {
+              const chatSection = document.getElementById("ai-chat")
+              if (chatSection) {
+                chatSection.scrollIntoView({ behavior: "smooth" })
+              }
+
+              setTimeout(() => {
+                window.dispatchEvent(new CustomEvent("triggerChatMessage", {
+                  detail: { message: "Vorrei saperne di piu sui servizi offerti. Puoi darmi una panoramica?" }
+                }))
+              }, 800)
+            }}
             className="inline-flex items-center gap-3 px-6 py-3 md:px-8 md:py-4 bg-gradient-to-r from-primary to-secondary rounded-full font-medium text-white hover:shadow-lg hover:shadow-primary/25 transition-all duration-300 text-sm md:text-base"
             whileHover={{ scale: 1.05, y: -2 }}
             whileTap={{ scale: 0.95 }}
